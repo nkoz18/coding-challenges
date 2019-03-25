@@ -1,44 +1,30 @@
 function MaximalSquare(strArr) {
-  let fullArray = strArr.map(val => val.split(''));
 
-  let initArray = initialEval(fullArray);
+  var maximumSquareSize = 0;
+  // variable for storing the max result
 
-  if (initArray.length === 0) {
-    return 0;
-  }
-  count = 1;
-
-  while (initArray.length) {
-    initArray = initArray.filter(val => {
-      return testOne(fullArray, count + 1, val[0], val[1]);
-    })
-    count++;
-    if (count > 10) break;
-  }
-  return Math.pow(count - 1, 2);
-}
-
-function initialEval (arr) {
-  let initArray = [];
-  arr.forEach((row, rowNum) => {
-    row.forEach((val, colNum) => {
-      if (val === '1') {
-        initArray.push([rowNum, colNum]);
-      }
-    });
+  var cache = strArr.map(function(arr) {
+      return arr.slice();
   });
-  return initArray;
-}
 
-function testOne(arr, size, r, c) {
-  for (let i = 0; i < size; i++) {
-    for (let j = 0; j < size; j++) {
-      if (!arr[r + i] || !arr[r + i][c + j] || arr[r + i][c + j] !== '1') {
-        return false;
+  for(i=0;i<strArr.length;i++){
+
+    for(j=0;j<strArr[i].length;j++){
+
+      if (strArr[i][j] > 0) {
+        cache[i][j] = 1 + Math.min(cache[i][j-1], cache[i-1][j],cache[i-1][j-1]);
       }
+
+      if(cache[i][j] > maximumSquareSize) {
+        maximumSquareSize = cache[i][j];
+      }
+
     }
+
   }
-  return true;
+
+  return maximumSquareSize;
+
 }
 
 // keep this function call here
