@@ -27,6 +27,3 @@ var maxSubArray = function(nums) {
 };
 
 console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4]));
-i = 8
-prev = 6
-max = 6
