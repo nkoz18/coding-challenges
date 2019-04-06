@@ -29,8 +29,6 @@ function hash(s) {
   return h;
 }
 
-
-
 const getDigits = (value, base) => {
     const result = [];
 
@@ -42,13 +40,13 @@ const getDigits = (value, base) => {
     return result.reverse();
 };
 
-const getLetter = index =>
+const getChar = index =>
     'acdekilmnoprstuy'.charAt(index);
 
 const getPreimage = value =>
     getDigits(value, 83n)
         .map(Number)
-        .map(getLetter)
+        .map(getChar)
         .join('');
 
 console.log(getPreimage(35502317995n));

@@ -12,8 +12,6 @@
 //
 // Please enter the one word solution below, and comments you would like to add and zip up and submit your solution.
 
-//console.log(hash("cloud"));
-
 // input is a string - cloud
 // output is a integer that is 35502317995
 
@@ -36,32 +34,33 @@ function hash(s) {
 const charset = 'acdekilmnoprstuy';
 
 function bruteforce(hash, base = 9, result = {value: ''}) {
-  // Always multiply the previous value by 82
+
   base *= 83;
 
   for (let i = 0; i < charset.length; i++) {
-    // Add the char index to the value
+
     value = base + i;
-    // If we found the hash, append the current char and return
+
     if (value === hash) {
       result.value += charset[i];
       return base === 747 ? result.value : value;
     }
-    // If we went past the hash, return null to mark this iteration as failed
+
     if (value > hash) {
       return null;
     }
-    // Otherwise, attempt next level starting from current value
+
     value = bruteforce(hash, value, result);
-    // If we found the hash from there, prepend the current char and return
+
     if (value === hash) {
       result.value = charset[i] + result.value;
       return base === 747 ? result.value : value;
     }
   }
 
-  // We tried everything, no match found :(
+
   return null;
 }
 
 console.log(bruteforce(1705070271736160785));
+//console.log(hash("cloud"));
